@@ -8,94 +8,116 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:rgba(207,174,220,0.2)}
+::-webkit-scrollbar-thumb{background:rgba(196,110,208,0.2)}
 :root{
-  --bg:#08050F;--bg-mid:#0F0818;--dark:#0A041A;--dark-mid:#140828;
-  --lav:#CFAEDC;--pink:#FA9CE0;--mag:#E14DA8;
-  --txt:#F0E8F8;--txt-sec:#D4C0E8;--txt-muted:#A888C8;--txt-faded:#7A5898;
-  --border:rgba(207,174,220,0.12);--card:rgba(20,8,40,0.85);--shadow:rgba(225,77,168,0.08);
+  --bg:#0D0610;--bg-mid:#180B1E;--dark:#0D0618;
+  --accent:#733960;--accent-lt:#B16AA2;--detail:#C4789A;
+  --orchid:#C6B6CD;--moon:#F7EDF1;
+  --txt:#F7EDF1;--txt-sec:#E8D4E0;--txt-muted:#C4A0B8;--txt-faded:#8A6080;
+  --border:rgba(179,106,162,0.15);--shadow:rgba(36,10,25,0.4);
 }
-body{background:var(--bg);min-height:100vh;font-family:'Montserrat',sans-serif;color:var(--txt-sec);}
-canvas.stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+body{
+  min-height:100vh;
+  font-family:'Montserrat',sans-serif;
+  color:var(--txt-sec);
+  background:#07030F;
+  background-image:
+    linear-gradient(180deg, rgba(7,3,15,0.72) 0%, rgba(10,4,26,0.65) 40%, rgba(7,3,15,0.75) 100%),
+    url('https://i.imgur.com/Ogy8oZt.jpeg');
+  background-size:cover;
+  background-position:center top;
+  background-attachment:fixed;
+}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 12%, rgba(245,238,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 8%, rgba(245,238,255,0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 45% 5%, rgba(255,255,255,1) 0%, transparent 100%),
+    radial-gradient(1px 1px at 68% 15%, rgba(245,238,255,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 88% 9%, rgba(245,238,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 35%, rgba(245,238,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 28%, rgba(245,238,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 55% 42%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 38%, rgba(245,238,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 92% 55%, rgba(245,238,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 62%, rgba(245,238,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 28% 70%, rgba(245,238,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 62% 68%, rgba(245,238,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 75%, rgba(245,238,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 18% 88%, rgba(245,238,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 48% 92%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 85%, rgba(245,238,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 95% 90%, rgba(245,238,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 12% 55%, rgba(245,238,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 58% 78%, rgba(245,238,255,0.45) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 33% 45%, rgba(245,238,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 52%, rgba(245,238,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 85% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 62%, rgba(245,238,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 96% 72%, rgba(245,238,255,0.5) 0%, transparent 100%);
+}
 .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 20px 60px}
 
-.hero{text-align:center;padding:52px 24px 40px;position:relative;}
-.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:180%;height:180%;background:radial-gradient(circle at 60% 40%,rgba(225,77,168,0.07),transparent 55%);pointer-events:none;}
-.hero-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mag);margin-bottom:14px;}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,8vw,3.6rem);font-weight:700;color:var(--txt);line-height:1.1;margin-bottom:14px;}
-.hero h1 em{color:var(--pink);font-style:italic;font-weight:400}
-.hero p{font-size:13px;color:var(--txt-muted);line-height:1.7;max-width:420px;margin:0 auto 10px;}
-.hero-accent{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--lav);letter-spacing:1.5px;margin-top:8px;}
+.hero{text-align:center;padding:60px 24px 44px;position:relative;}
+.hero-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent-lt);margin-bottom:14px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,8vw,3.8rem);font-weight:700;color:var(--txt);line-height:1.1;margin-bottom:14px;}
+.hero h1 em{color:var(--accent-lt);font-style:italic;font-weight:400}
+.hero p{font-size:13px;color:var(--txt-muted);line-height:1.75;max-width:420px;margin:0 auto 10px;}
+.hero-accent{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--detail);letter-spacing:1px;margin-top:10px;}
 
-.card{background:var(--card);border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 16px var(--shadow);backdrop-filter:blur(12px);padding:24px;margin-bottom:14px;}
-.form-label{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mag);margin-bottom:8px;display:block;}
-.form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(207,174,220,0.18);border-radius:9px;padding:12px 15px;color:var(--txt);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(225,77,168,0.5);}
+.card{background:rgba(18,8,32,0.75);border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 20px var(--shadow);backdrop-filter:blur(16px);padding:24px;margin-bottom:14px;}
+.form-label{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-lt);margin-bottom:8px;display:block;}
+.form-input,.form-select,.form-textarea{width:100%;background:rgba(245,238,255,0.04);border:1px solid rgba(180,120,220,0.2);border-radius:9px;padding:12px 15px;color:var(--txt);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(139,63,168,0.6);}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--txt-faded);opacity:0.7}
-.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23A888C8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.form-select option{background:#1a0a30}
+.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238060A8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.form-select option{background:#120820}
 .form-textarea{resize:vertical;min-height:110px;line-height:1.7}
 
-.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.check-item{display:flex;align-items:center;gap:10px;background:rgba(207,174,220,0.04);border:1px solid var(--border);border-radius:9px;padding:10px 13px;cursor:pointer;transition:all 0.2s;}
-.check-item:hover{border-color:rgba(225,77,168,0.3)}
-.check-item.on{background:rgba(225,77,168,0.08);border-color:rgba(225,77,168,0.4)}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check-item{display:flex;align-items:center;gap:10px;background:rgba(180,120,220,0.04);border:1px solid var(--border);border-radius:9px;padding:10px 13px;cursor:pointer;transition:all 0.2s;}
+.check-item:hover{border-color:rgba(139,63,168,0.4)}
+.check-item.on{background:rgba(139,63,168,0.1);border-color:rgba(196,110,208,0.45)}
 .check-item span{font-size:12px;color:var(--txt-muted);transition:color 0.2s}
-.check-item.on span{color:var(--pink)}
-.check-dot{width:16px;height:16px;border-radius:4px;flex-shrink:0;border:1.5px solid rgba(207,174,220,0.25);transition:all 0.2s;}
-.check-item.on .check-dot{background:var(--mag);border-color:var(--mag)}
+.check-item.on span{color:var(--accent-lt)}
+.check-dot{width:16px;height:16px;border-radius:4px;flex-shrink:0;border:1.5px solid rgba(180,120,220,0.25);transition:all 0.2s;}
+.check-item.on .check-dot{background:var(--accent);border-color:var(--accent)}
 
 .divider{display:flex;align-items:center;gap:10px;margin:4px 0 16px;}
 .divider-line{flex:1;height:1px;background:var(--border)}
 .divider span{font-size:9px;color:var(--txt-faded);letter-spacing:1px;text-transform:uppercase;font-weight:700}
 
-.gen-btn{width:100%;padding:15px;background:linear-gradient(135deg,rgba(225,77,168,0.22),rgba(250,156,224,0.22));border:1px solid rgba(225,77,168,0.55);border-radius:50px;color:var(--pink);font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.25s;margin-top:4px;}
-.gen-btn:hover:not(:disabled){background:linear-gradient(135deg,rgba(225,77,168,0.4),rgba(250,156,224,0.38));box-shadow:0 8px 28px rgba(225,77,168,0.3);transform:translateY(-1px);}
+.gen-btn{width:100%;padding:15px;background:linear-gradient(135deg,rgba(139,63,168,0.3),rgba(196,110,208,0.25));border:1px solid rgba(139,63,168,0.6);border-radius:50px;color:var(--accent-lt);font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.25s;margin-top:4px;}
+.gen-btn:hover:not(:disabled){background:linear-gradient(135deg,rgba(139,63,168,0.5),rgba(196,110,208,0.4));box-shadow:0 8px 32px rgba(139,63,168,0.35);transform:translateY(-1px);}
 .gen-btn:disabled{opacity:0.5;cursor:not-allowed}
 
 .output{display:none;animation:fadeUp .4s ease both;}
 .output.show{display:block}
 @keyframes fadeUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 
-.output-card{background:rgba(20,8,40,0.9);border:1px solid rgba(225,77,168,0.25);border-radius:14px;padding:24px;position:relative;overflow:hidden;}
-.output-glow{position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(225,77,168,0.06),transparent 70%);pointer-events:none;}
-.output-label{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mag);margin-bottom:16px;}
+.output-card{background:rgba(18,8,32,0.85);border:1px solid rgba(139,63,168,0.3);border-radius:14px;padding:24px;position:relative;overflow:hidden;backdrop-filter:blur(16px);}
+.output-glow{position:absolute;top:0;right:0;width:220px;height:220px;background:radial-gradient(circle,rgba(139,63,168,0.08),transparent 70%);pointer-events:none;}
+.output-label{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-lt);margin-bottom:16px;}
 .output-text{font-size:13.5px;color:var(--txt-sec);line-height:1.9;white-space:pre-wrap;font-family:'Montserrat',sans-serif;position:relative;}
 
 .dots{display:flex;gap:7px;align-items:center;padding:4px 0}
-.dots span{width:7px;height:7px;border-radius:50%;background:var(--mag);animation:pulse 1.4s infinite ease-in-out;}
+.dots span{width:7px;height:7px;border-radius:50%;background:var(--accent-lt);animation:pulse 1.4s infinite ease-in-out;}
 .dots span:nth-child(2){animation-delay:.2s}
 .dots span:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,80%,100%{transform:scale(0);opacity:0}40%{transform:scale(1);opacity:1}}
 
-/* ACTION BUTTONS */
 .action-btns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px;}
-.action-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:11px 14px;border-radius:50px;cursor:pointer;
-  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;border:1px solid;
-}
-.btn-copy{background:transparent;border-color:rgba(207,174,220,0.25);color:var(--txt-muted);}
-.btn-copy:hover{border-color:var(--lav);color:var(--lav);}
-.btn-email{background:transparent;border-color:rgba(225,77,168,0.3);color:var(--pink);}
-.btn-email:hover{background:rgba(225,77,168,0.08);border-color:var(--mag);color:var(--mag);}
-.btn-pdf{background:transparent;border-color:rgba(207,174,220,0.25);color:var(--txt-muted);}
-.btn-pdf:hover{border-color:var(--lav);color:var(--lav);}
-.btn-notes{background:transparent;border-color:rgba(207,174,220,0.25);color:var(--txt-muted);}
-.btn-notes:hover{border-color:var(--lav);color:var(--lav);}
+.action-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:50px;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;border:1px solid;}
+.btn-copy{background:transparent;border-color:rgba(180,120,220,0.25);color:var(--txt-muted);}
+.btn-copy:hover{border-color:var(--orchid);color:var(--orchid);}
+.btn-email{background:transparent;border-color:rgba(139,63,168,0.35);color:var(--accent-lt);}
+.btn-email:hover{background:rgba(139,63,168,0.1);border-color:var(--accent);color:var(--accent-lt);}
+.btn-pdf{background:transparent;border-color:rgba(180,120,220,0.25);color:var(--txt-muted);}
+.btn-pdf:hover{border-color:var(--orchid);color:var(--orchid);}
+.btn-notes{background:transparent;border-color:rgba(180,120,220,0.25);color:var(--txt-muted);}
+.btn-notes:hover{border-color:var(--orchid);color:var(--orchid);}
 
-.btn-icon{font-size:13px;}
-
-.toast{
-  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:rgba(20,8,40,0.97);border:1px solid rgba(225,77,168,0.4);
-  border-radius:50px;padding:10px 22px;
-  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;
-  color:var(--pink);letter-spacing:1px;
-  opacity:0;transition:all 0.3s;z-index:999;pointer-events:none;
-  backdrop-filter:blur(12px);
-}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(18,8,32,0.97);border:1px solid rgba(139,63,168,0.5);border-radius:50px;padding:10px 22px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--accent-lt);letter-spacing:1px;opacity:0;transition:all 0.3s;z-index:999;pointer-events:none;backdrop-filter:blur(12px);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -103,12 +125,13 @@ canvas.stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z
 </style>
 </head>
 <body>
-<canvas class="stars" id="starCanvas"></canvas>
+<img src="https://raw.githubusercontent.com/badassalchemy/imageassets/main/dark%20nebula%20baxckground.jpg" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:0.35;pointer-events:none;" alt="">
+<div style="position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,rgba(7,3,15,0.55) 0%,rgba(10,4,26,0.5) 50%,rgba(7,3,15,0.65) 100%);pointer-events:none;"></div>
+<div class="stars"></div>
 <div class="toast" id="toast"></div>
 
 <div class="wrap">
   <div class="hero">
-    <div class="hero-glow"></div>
     <div class="hero-badge">Badass Alchemy ✦</div>
     <h1>Consult the AI Oracle<br><em>The Queen Within</em></h1>
     <p>Tell her what's alive. She'll meet you there with custom prompts, rituals, and strategy — tailored to your exact season.</p>
@@ -165,45 +188,17 @@ canvas.stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z
       <div class="output-glow"></div>
       <div class="output-label">Your Sacred Reading</div>
       <div class="output-text" id="outputText"></div>
-
       <div class="action-btns" id="actionBtns" style="display:none">
-        <button class="action-btn btn-copy" onclick="copyText()">
-          <span class="btn-icon">📋</span> Copy reading
-        </button>
-        <button class="action-btn btn-email" onclick="emailReading()">
-          <span class="btn-icon">✉️</span> Email to me
-        </button>
-        <button class="action-btn btn-pdf" onclick="downloadPDF()">
-          <span class="btn-icon">📄</span> Save as PDF
-        </button>
-        <button class="action-btn btn-notes" onclick="saveToNotes()">
-          <span class="btn-icon">📝</span> Save to notes
-        </button>
+        <button class="action-btn btn-copy" onclick="copyText()"><span>📋</span> Copy reading</button>
+        <button class="action-btn btn-email" onclick="emailReading()"><span>✉️</span> Email to me</button>
+        <button class="action-btn btn-pdf" onclick="downloadPDF()"><span>📄</span> Save as PDF</button>
+        <button class="action-btn btn-notes" onclick="saveToNotes()"><span>📝</span> Save to notes</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// Stars
-(function(){
-  const c=document.getElementById('starCanvas'),ctx=c.getContext('2d');
-  function draw(){
-    c.width=window.innerWidth;c.height=window.innerHeight;
-    ctx.clearRect(0,0,c.width,c.height);
-    for(let i=0;i<200;i++){
-      const x=Math.random()*c.width,y=Math.random()*c.height,r=Math.random()*1.3+0.2,a=Math.random()*0.65+0.15;
-      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
-      ctx.fillStyle=Math.random()>.7?'#CFAEDC':'#ffffff';ctx.globalAlpha=a;ctx.fill();
-    }
-    ctx.globalAlpha=1;
-    const g=ctx.createRadialGradient(c.width*.7,c.height*.3,0,c.width*.7,c.height*.3,c.width*.4);
-    g.addColorStop(0,'rgba(207,174,220,0.07)');g.addColorStop(.5,'rgba(225,77,168,0.04)');g.addColorStop(1,'transparent');
-    ctx.fillStyle=g;ctx.fillRect(0,0,c.width,c.height);
-  }
-  draw();window.addEventListener('resize',draw);
-})();
-
 function toggle(el){el.classList.toggle('on')}
 
 function showToast(msg){
@@ -212,59 +207,39 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-function getRawText(){
-  return document.getElementById('outputText').innerText || '';
-}
+function getRawText(){return document.getElementById('outputText').innerText||'';}
 
-function copyText(){
-  navigator.clipboard.writeText(getRawText()).then(()=>showToast('Reading copied ✓'));
-}
+function copyText(){navigator.clipboard.writeText(getRawText()).then(()=>showToast('Reading copied ✓'));}
 
 function emailReading(){
-  const body=encodeURIComponent('My Reading from The Queen Within — Badass Alchemy\n\n' + getRawText());
-  const subject=encodeURIComponent('My Queen Within Reading ✦');
-  window.location.href=`mailto:?subject=${subject}&body=${body}`;
+  const body=encodeURIComponent('My Reading from The Queen Within — Badass Alchemy\n\n'+getRawText());
+  window.location.href=`mailto:?subject=${encodeURIComponent('My Queen Within Reading ✦')}&body=${body}`;
 }
 
 function downloadPDF(){
-  const text = getRawText();
-  const win = window.open('','_blank');
-  win.document.write(`
-    <html><head><title>The Queen Within — My Reading</title>
-    <style>
-      body{font-family:Georgia,serif;max-width:680px;margin:40px auto;padding:0 24px;color:#1a0a30;line-height:1.8;}
-      h1{font-size:28px;color:#E14DA8;margin-bottom:8px;}
-      .sub{font-size:13px;color:#7A5898;margin-bottom:32px;font-style:italic;}
-      pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:15px;color:#2a1040;}
-      .footer{margin-top:40px;font-size:11px;color:#A888C8;border-top:1px solid #e8d0f0;padding-top:12px;}
-    </style></head>
-    <body>
-      <h1>The Queen Within</h1>
-      <div class="sub">Badass Alchemy ✦ receive. trust. become.</div>
-      <pre>${text}</pre>
-      <div class="footer">badassalchemy.com ✦ The Baddie Society</div>
-      <script>window.onload=()=>{window.print();}<\/script>
-    </body></html>
-  `);
+  const text=getRawText();
+  const win=window.open('','_blank');
+  win.document.write(`<html><head><title>The Queen Within</title>
+    <style>body{font-family:Georgia,serif;max-width:680px;margin:40px auto;padding:0 24px;color:#1a0a30;line-height:1.8;}
+    h1{font-size:28px;color:#8B3FA8;margin-bottom:8px;}.sub{font-size:13px;color:#7A5898;margin-bottom:32px;font-style:italic;}
+    pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:15px;color:#2a1040;}
+    .footer{margin-top:40px;font-size:11px;color:#8060A8;border-top:1px solid #d0b0e8;padding-top:12px;}</style>
+    </head><body>
+    <h1>The Queen Within</h1><div class="sub">Badass Alchemy ✦ receive. trust. become.</div>
+    <pre>${text}</pre><div class="footer">badassalchemy.com ✦ The Baddie Society</div>
+    <script>window.onload=()=>{window.print();}<\/script></body></html>`);
   win.document.close();
 }
 
 function saveToNotes(){
-  const text = getRawText();
-  // Try native share first (mobile)
-  if(navigator.share){
-    navigator.share({title:'The Queen Within — My Reading',text}).catch(()=>fallbackNotes(text));
-  } else {
-    fallbackNotes(text);
-  }
+  const text=getRawText();
+  if(navigator.share){navigator.share({title:'The Queen Within — My Reading',text}).catch(()=>fallbackNotes(text));}
+  else{fallbackNotes(text);}
 }
 
 function fallbackNotes(text){
-  // Copy to clipboard with note-friendly header
-  const formatted = '— THE QUEEN WITHIN —\nBadass Alchemy ✦\n\n' + text + '\n\n✦ receive. trust. become.';
-  navigator.clipboard.writeText(formatted).then(()=>{
-    showToast('Copied — paste into your notes app ✓');
-  });
+  navigator.clipboard.writeText('— THE QUEEN WITHIN —\nBadass Alchemy ✦\n\n'+text+'\n\n✦ receive. trust. become.')
+    .then(()=>showToast('Copied — paste into your notes app ✓'));
 }
 
 const portalMap={money:'Money & Receiving',visibility:'Visibility & Being Seen',authority:'Authority & Leadership',clients:'Clients & Boundaries',worth:'Self-Worth & Rest',comparison:'Comparison & Envy',identity:'Identity & Reinvention',nervous:'Nervous System & Income'};
@@ -277,7 +252,7 @@ async function generate(){
 
   if(!context&&!portal){
     const ta=document.getElementById('genContext');
-    ta.focus();ta.style.borderColor='rgba(225,77,168,0.6)';
+    ta.focus();ta.style.borderColor='rgba(139,63,168,0.7)';
     setTimeout(()=>{ta.style.borderColor=''},2000);return;
   }
 
@@ -291,24 +266,25 @@ async function generate(){
   const portalName=portal?portalMap[portal]:'general shadow work and life/business integration';
   const requested=checked.length?checked.join(', '):'5 deep shadow work prompts';
 
-  const system=`You are the Badass Alchemy Oracle — the voice of Badass Alchemy, a women's empowerment brand created by Danielle. You are psychologically sophisticated, spiritually grounded, and directionally precise. Your tone is mean-girl confident and regulated — never aggressive, never fluffy. You speak like the woman who has already done the work and is calling her forward (almost there, not defeated). You blend Jungian shadow work, somatic intelligence, and real business strategy. You use language like "the shadow part," "your wiser self," "integration," "self-trust," "aligned action," and "nervous system." You always thread back to self-trust as the root transformation. You address women with respect for their intelligence AND their sensitivity. You never preach. You never perform spirituality. You are sacred and practical in the same breath. The brand mantra: soft life, savage execution.`;
-
-  const prompt=`${addressing}\n\nPortal they're working in: ${portalName}\n\nWhat's alive in their life right now:\n${context}\n\nPlease generate ONLY the following (cleanly formatted, no filler intro): ${requested}\n\nFormatting guidance:\n— Use clear section headers in ALL CAPS followed by a colon\n— Each prompt should feel written specifically for this person's situation\n— Be psychologically precise — name the shadow mechanism, not just the surface behavior\n— Connect inner work to outer life and business strategy\n— End with a short grounding reminder (2–3 sentences max) labeled CLOSING TRANSMISSION`;
-
   try{
-    const res=await fetch('/api/oracle',{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,portal:portalName,context:context||'general shadow patterns',requested})
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-calls':'true'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`You are the Badass Alchemy Oracle — the voice of Badass Alchemy, a women's empowerment brand. You are psychologically sophisticated, spiritually grounded, and directionally precise. Your tone is confident and regulated — never aggressive, never fluffy. You blend Jungian shadow work, somatic intelligence, and real business strategy. You use language like "the shadow part," "your wiser self," "integration," "self-trust," "aligned action," and "nervous system." You always thread back to self-trust as the root transformation. You address women with respect for their intelligence AND their sensitivity. You never preach. You are sacred and practical in the same breath. Brand mantra: soft life, savage execution.`,
+        messages:[{role:'user',content:`${addressing}\n\nPortal: ${portalName}\n\nWhat's alive right now:\n${context||'general shadow patterns and self-trust work'}\n\nGenerate ONLY the following (no filler intro): ${requested}\n\nFormatting: Use section headers in ALL CAPS followed by a colon. Be psychologically precise — name the shadow mechanism. Connect inner work to outer business strategy. End with a short grounding reminder (2–3 sentences) labeled CLOSING TRANSMISSION.`}]
+      })
     });
     const data=await res.json();
-    const reply=data.content||'The oracle is resting. Please try again.';
+    const reply=data.content?.[0]?.text||'The oracle is resting. Please try again.';
     text.innerHTML=reply
       .replace(/\n/g,'<br>')
-      .replace(/([A-Z][A-Z\s&]+):/g,'<span style="font-size:9px;font-weight:700;letter-spacing:1.4px;color:#E14DA8;text-transform:uppercase;display:block;margin:18px 0 6px">$1 ✦</span>');
+      .replace(/([A-Z][A-Z\s&]+):/g,'<span style="font-size:9px;font-weight:700;letter-spacing:1.4px;color:#C46ED0;text-transform:uppercase;display:block;margin:18px 0 6px">$1 ✦</span>');
     actionBtns.style.display='grid';
   }catch(e){
-    text.innerHTML='<span style="color:#A888C8;font-style:italic">The oracle encountered a disturbance in the field. Please try again.</span>';
+    text.innerHTML='<span style="color:#8060A8;font-style:italic">The oracle encountered a disturbance in the field. Please try again.</span>';
   }
   btn.disabled=false;
 }
